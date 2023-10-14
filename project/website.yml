@@ -1,6 +1,6 @@
 ---
 - name: Enable intranet services
-  hosts: server52
+  hosts: all
   become: true
   tasks:
     - name: Ensurehttpd and firewalld installed
