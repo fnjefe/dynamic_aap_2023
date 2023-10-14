@@ -1,0 +1,19 @@
+---
+- hosts: all
+  tasks:   
+    - name: Remove  user 'frank_amin' 
+      ansible.builtin.user:
+        name: frank_admin
+        state: absent
+
+    - name: Remove normal  user 'franknormal'
+      ansible.builtin.user:
+        name: franknormal
+        state: present
+
+    - name: Remove admin  user 'azi1_admin'
+      ansible.builtin.user:
+        name: azi1_admin
+        state: absent
+
+        

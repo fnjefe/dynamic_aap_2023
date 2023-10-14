@@ -1,0 +1,45 @@
+---
+- name: Enable intranet services
+  hosts: server52
+  become: true
+  tasks:
+    - name: Ensurehttpd and firewalld installed
+      ansible.builtin.yum:
+        name:
+          - httpd
+          - firewalld
+        state: present
+
+    - name: test html page is installed
+      ansible.builtin.copy:
+        content: "Welcome to Dynamic Technologies\n"
+        dest: /var/www/html/index.html
+
+    - name: firewalld enabled and running
+      ansible.builtin.service:
+        name: firewalld
+        enabled: true
+        state: started
+
+    - name: firewalld permits http service
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: true
+
+    - name: httpd enabled and running
+      ansible.builtin.service:
+        name: httpd
+        enabled: true
+        state: started
+
+- name: Test intranet web server
+  hosts: server52
+  become: false
+  tasks:
+    - name: connect to intranet web server
+      ansible.builtin.uri:
+        url: http://10.0.10.52
+        return_content: true
+        status_code: 200

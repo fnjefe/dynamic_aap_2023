@@ -1,0 +1,21 @@
+---
+- hosts: all
+  tasks:   
+    - name: Add the admin  user 'frank' 
+      ansible.builtin.user:
+        name: frank_admin
+        shell: /bin/bash
+        groups: wheel
+        append: yes
+
+    - name: Add the normal  user 'franknormal'
+      ansible.builtin.user:
+        name: franknormal
+        state: present
+
+    - name: Add the admin  user 'azi1'
+      ansible.builtin.user:
+        name: azi1_admin
+        groups: wheel
+
+        

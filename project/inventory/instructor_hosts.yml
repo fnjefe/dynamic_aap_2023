@@ -1,0 +1,3 @@
+[instructor]
+server50 ansible_host=10.0.10.50
+server51 ansible_host=10.0.10.51
